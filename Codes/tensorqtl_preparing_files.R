@@ -19,7 +19,7 @@ options(scipen = 999) #You can turn off scientific notation for numbers using th
 # it already made in python using pyqtl (io.gtf_to_tss_bed) : https://github.com/broadinstitute/pyqtl
 
 
-TSS_df <- read_csv("D:/Fernando/Single cell analysis/TSS_df.csv") %>%
+TSS_df <- read_csv("/dcs04/lieber/lcolladotor/hydeGoes_LIBD3010/hydeGoes_scSeq_mdd/Tensorqtl/TSS_df.csv") %>%
   dplyr::rename(ID = gene_id)
 
 #### Single cell data ######
