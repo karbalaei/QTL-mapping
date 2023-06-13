@@ -39,22 +39,22 @@ using a for loop, I run tensorqtl with three different parameters :
 2. Add a window of 500,000 instead of  defalut value(1Mbp).
 
 > for f in ./*/*bed.gz\
-	do \
-	echo "Start analyses of $f" \ 
-	python3 -m tensorqtl "MDD_control_sc_maf1" \
-	$f \
-	${f/_df.bed.gz/_modified} \
-    --covariates ${f/df.bed.gz/covariates.txt} \
-    --mode cis_nominal --window=500000 \
+		do \
+		echo "Start analyses of $f" \
+		python3 -m tensorqtl "MDD_control_sc_maf1" \
+		$f \
+		${f/_df.bed.gz/_modified} \
+		--covariates ${f/df.bed.gz/covariates.txt} \
+		--mode cis_nominal --window=500000 \
 	done 
 
 3. Add maf of 0.05 instead of  defalut value(0).
 
 > for f in ./*/*bed.gz\
 	do \
-	echo "Start analyses of $f" \ 
-	python3 -m tensorqtl "MDD_control_sc_maf1" \
-	$f \
+		echo "Start analyses of $f" \
+		python3 -m tensorqtl "MDD_control_sc_maf1" \
+		$f \
 	${f/_df.bed.gz/_modified_maf} \
     --covariates ${f/df.bed.gz/covariates.txt} \
     --mode cis_nominal --window=500000 --maf_threshold=0.05 \
