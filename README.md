@@ -27,15 +27,14 @@ using a for loop, I run tensorqtl with three different parameters :
 1. Default parameters :
 
 > 	for f in ./*/*bed.gz \
-	do \
-	echo "Start analyses of $f" \
-	python3 -m tensorqtl "MDD_control_sc_maf1" \
-	$f \
-	${f/_df.bed.gz/} \
-    --covariates ${f/df.bed.gz/covariates.txt} \
-    --mode cis_nominal
-
-done
+		do \
+		echo "Start analyses of $f" \
+		python3 -m tensorqtl "MDD_control_sc_maf1" \
+		$f \
+		${f/_df.bed.gz/} \
+		--covariates ${f/df.bed.gz/covariates.txt} \
+		--mode cis_nominal \
+	done
 
 2. Add a window of 500,000 instead of  defalut value(1Mbp).
 
