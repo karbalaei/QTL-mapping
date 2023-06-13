@@ -20,4 +20,23 @@ Here is an example of *covariate file* from *astro* cell type :
 and Here is an example of *BED* file from *astro* cell type : 
 ![BED_file](https://github.com/karbalaei/tensorqtl/blob/main/Graph/BED_file.jpg)
 
-BED_file.jpg
+## Run Tensorqtl in BASH
+
+using a for loop, I run tensorqtl with three different parameters :
+
+1. Default parameters :
+
+> 	for f in ./*/*bed.gz;
+	do
+	echo "location of analyses of $f" 
+	python3 -m tensorqtl "MDD_control_sc_maf1" \
+	$f \
+	${f/_df.bed.gz/} \
+    --covariates ${f/df.bed.gz/covariates.txt} \
+    --mode cis_nominal
+
+done
+
+2. Add a window of 500,000 instead of  defalut value(1Mbp).
+
+3. Add maf of 0.05 instead of  defalut value(0).
