@@ -26,9 +26,9 @@ using a for loop, I run tensorqtl with three different parameters :
 
 1. Default parameters :
 
-> 	for f in ./*/*bed.gz;
-	do
-	echo "location of analyses of $f" 
+> 	for f in ./*/*bed.gz \
+	do \
+	echo "Start analyses of $f" \
 	python3 -m tensorqtl "MDD_control_sc_maf1" \
 	$f \
 	${f/_df.bed.gz/} \
