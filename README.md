@@ -65,4 +65,6 @@ Using a for loop, I run Tensorqtl with three different parameters :
 
 In the final step, Parquet files from different analyses were loaded in R and after calculation FDR, SNPs with *FDR < 0.05* were selected for further investigation. 
 
-#Matrix eQTL
+#2. Matrix eQTL
+
+![Flowchart](https://github.com/karbalaei/tensorqtl/blob/main/Graph/Matrix_eqtl.jpg)
