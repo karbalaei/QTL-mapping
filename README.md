@@ -1,4 +1,4 @@
-# 1.Tensorqtl 
+# 1. Tensorqtl 
 
 Tensorqtl algorithm [tensorqtl](https://github.com/broadinstitute/tensorqtl/tree/master) applied on both 21 different cell types and seven different broad cell types resulted from snRNA-seq data. 
 
