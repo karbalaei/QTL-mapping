@@ -1,8 +1,8 @@
-#qtl mapping
+# qtl mapping
 
 ## 1. Tensorqtl 
 
-Tensorqtl algorithm [tensorqtl](https://github.com/broadinstitute/tensorqtl/tree/master) applied on both 21 different cell types and seven different broad cell types resulted from snRNA-seq data. 
+[Tensorqtl algorithm](https://github.com/broadinstitute/tensorqtl/tree/master) applied on both 21 different cell types and seven different broad cell types resulted from snRNA-seq data. 
 
 ![Flowchart](https://github.com/karbalaei/tensorqtl/blob/main/Graph/Flowchart.jpg)
 
@@ -68,5 +68,7 @@ Using a for loop, I run Tensorqtl with three different parameters :
 In the final step, Parquet files from different analyses were loaded in R and after calculation FDR, SNPs with *FDR < 0.05* were selected for further investigation. 
 
 ## 2. Matrix eQTL
+
+[Matrix eQTL algorithm](http://www.bios.unc.edu/research/genomic_software/Matrix_eQTL/) applied on both 21 different cell types and seven different broad cell types resulted from snRNA-seq data. 
 
 ![Flowchart](https://github.com/karbalaei/tensorqtl/blob/main/Graph/Matrix_eqtl.jpg)
