@@ -1,17 +1,19 @@
-# 1. Tensorqtl 
+#qtl mapping
+
+## 1. Tensorqtl 
 
 Tensorqtl algorithm [tensorqtl](https://github.com/broadinstitute/tensorqtl/tree/master) applied on both 21 different cell types and seven different broad cell types resulted from snRNA-seq data. 
 
 ![Flowchart](https://github.com/karbalaei/tensorqtl/blob/main/Graph/Flowchart.jpg)
 
 
-## 1.1. Preparing TSS file:
+### 1.1. Preparing TSS file:
 
 In Python, using recommended [function](https://github.com/karbalaei/tensorqtl/blob/main/Codes/gtf_tss_code.py) from Tensorqtl tutorial ([pyqtl](https://github.com/broadinstitute/pyqtl)), the TSS file was created which containing chr, start, end and gene_id. 
 
 ![TSS file](https://github.com/karbalaei/tensorqtl/blob/main/Graph/TSS_file.jpg)
 
-## 1.2. Preparing BED and Covariate files in R
+### 1.2. Preparing BED and Covariate files in R
 
 Using the TSS file, Raw and normalized data of snRNA-Seq, the BED files and the Covariate files were created in [R](https://github.com/karbalaei/tensorqtl/blob/main/Codes/tensorqtl_preparing_files.R). Briefly speaking, I used metadata from the raw file of snRNA-Seq data and merged it with the TSS file. Then, after loading normalized data, I created the sorted BED file. For the covariate file, I used *num.sv* from *SVA* package to calculate how many PCA should I include in my analysis, which for 21 cell types it ranges from 15 to 20.  
 
@@ -21,7 +23,7 @@ Here is an example of *covariate file* from *astro* cell type :
 and Here is an example of *BED* file from *astro* cell type : 
 ![BED_file](https://github.com/karbalaei/tensorqtl/blob/main/Graph/BED_file.jpg)
 
-## 1.3. Runnig Tensorqtl in BASH
+### 1.3. Runnig Tensorqtl in BASH
 
 Using a for loop, I run Tensorqtl with three different parameters :
 
@@ -61,10 +63,10 @@ Using a for loop, I run Tensorqtl with three different parameters :
     --mode cis_nominal --window=500000 --maf_threshold=0.05 \
 	done 
 	
-##1.4.  Loading Parquet file and applying p-value correction :
+### 1.4.  Loading Parquet file and applying p-value correction :
 
 In the final step, Parquet files from different analyses were loaded in R and after calculation FDR, SNPs with *FDR < 0.05* were selected for further investigation. 
 
-#2. Matrix eQTL
+## 2. Matrix eQTL
 
 ![Flowchart](https://github.com/karbalaei/tensorqtl/blob/main/Graph/Matrix_eqtl.jpg)
