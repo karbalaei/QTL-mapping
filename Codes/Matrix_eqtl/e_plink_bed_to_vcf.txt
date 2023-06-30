@@ -1,0 +1,32 @@
+Loading LIBD module for plink/2.0
+Plink is invoked with the command 'plink2'.
+
+Currently Loaded Modules:
+  1) matlab/R2019a     5) gcc/4.4.7
+  2) stata/17          6) COMMUNITY_CENTOS7_DEFAULT_ENV
+  3) JHPCE_tools/1.0   7) JHPCE_CENTOS7_DEFAULT_ENV
+  4) sge/8.1.9         8) plink/2.0
+
+ 
+
+/cm/local/apps/sge/sge-8.1.9/default/spool/compute-124/job_scripts/3566492: line 27: plink: command not found
+Loading LIBD module for plink/1.90b6.6
+
+Currently Loaded Modules:
+  1) matlab/R2019a     5) gcc/4.4.7
+  2) stata/17          6) COMMUNITY_CENTOS7_DEFAULT_ENV
+  3) JHPCE_tools/1.0   7) JHPCE_CENTOS7_DEFAULT_ENV
+  4) sge/8.1.9         8) plink/1.90b6.6
+
+ 
+
+Loading LIBD module for plink/1.90b6.6
+
+Currently Loaded Modules:
+  1) matlab/R2019a     5) gcc/4.4.7
+  2) stata/17          6) COMMUNITY_CENTOS7_DEFAULT_ENV
+  3) JHPCE_tools/1.0   7) JHPCE_CENTOS7_DEFAULT_ENV
+  4) sge/8.1.9         8) plink/1.90b6.6
+
+ 
+

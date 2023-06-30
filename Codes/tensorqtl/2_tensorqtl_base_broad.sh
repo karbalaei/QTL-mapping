@@ -1,9 +1,9 @@
 #!/bin/bash
 #$ -cwd
-#$ -l mem_free=100G,h_vmem=100G,h_fsize=100G
-#$ -N filter_genomewide_nominal
-#$ -o o_tensorqtl_genomewide_nominal_modified.txt
-#$ -e e_tensorqtl_genomewide_nominal_modified.txt
+#$ -l mem_free=20G,h_vmem=20G,h_fsize=100G
+#$ -N Tensorqtl_Base_nominal
+#$ -o o_tensorqtl_genomewide_nominal_base_broad.txt
+#$ -e e_tensorqtl_genomewide_nominal_base_broad.txt
 #$ -m e
 
 echo "**** Job starts ****"
@@ -24,16 +24,15 @@ module list
 
 cd /dcs04/lieber/lcolladotor/hydeGoes_LIBD3010/hydeGoes_scSeq_mdd/Tensorqtl
 
-for f in ./*/*bed.gz;
+for f in ./Broad_cell_type/*/*.bed.gz;
 	do
-	echo "location of analysys of $f" 
-	ls
+	echo "Start analyses of $f" 
 	python3 -m tensorqtl "MDD_control_sc_maf1" \
 	$f \
-	${f/_df.bed.gz/_modified} \
-    --covariates ${f/df.bed.gz/covariates.txt} \
-    --mode cis_nominal --window=500000 
-
+	${f/_broad.bed.gz/_broad} \
+    --covariates ${f/bed.gz/covariates.txt} \
+    --mode cis_nominal
+    
 done
 
 echo "**** Job ends ****"

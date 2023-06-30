@@ -102,3 +102,64 @@ for ( i in 1: length(cell_type_names)) {
     write.table(paste0(cell_type_names[i] ,"_covariates.txt") , row.names = T , col.names = F, sep = "\t" , quote = F)
   
 }
+
+
+library(readr)
+genepos_both_gene_symbol_and_ensemble <- read_delim("genepos_both gene symbol and ensemble.txt", 
+                                                    delim = "\t", escape_double = FALSE, 
+                                                    trim_ws = TRUE)
+
+
+i =1 
+
+for ( i in 1: length(cell_type_names)) {
+  
+  dir <-  paste0("D:/Fernando/Single cell analysis/Tensorqtl/Broad_cell_type/Matrix_eQTL/" , 
+                 cell_type_names[i] , "_data" ) 
+  setwd(dir)
+  
+  logcount_data <- All_cells[[cell_type_names[i]]]  %>% as.data.frame()
+  
+  colnames(logcount_data) <-   colnames(logcount_data) %>% as.data.frame()%>%
+    set_names("Id") %>% left_join(Single_Cell_sample_id_data , by = "Id") %>%
+    pull(2)
+  
+  logcount_data%>% mutate(Symbol= rownames(logcount_data)) %>% left_join(genepos_both_gene_symbol_and_ensemble , by = "Symbol") %>% dplyr::select(!(c( "CHR","Start","End", "Symbol"))) %>% 
+    dplyr::rename(geneid = ID) %>%
+    relocate(geneid) %>%
+    fwrite(paste0(cell_type_names[i], "_GE2.txt"),  sep = "\t" , quote = F , row.names = F) # write a compressed file read.table(gzfile("test.dat.gz"),row.names=1)# read it back in
+  
+  ## PCA ##
+  
+  pd_ready <- pd %>% dplyr::filter(SampleId %in% colnames(logcount_data))
+  
+  mod <- model.matrix(~ PrimaryDx + Sex + snpPC1 + snpPC2 + snpPC3 + snpPC4 + snpPC5, data = pd_ready)
+  
+  pca <- prcomp(t(logcount_data))
+  
+  message(paste("start num sv for" , cell_type_names[i]))
+  
+  vfilter <-  nrow(logcount_data)
+  
+  k <- sva::num.sv(logcount_data, mod, vfilter = vfilter)
+  
+  PCs <- pca$x[, 1:k] %>% as.data.frame()
+  
+  PCs$SampleId  <-  rownames(PCs)
+  
+  covariates_Final <-  pd_ready %>% left_join(PCs , by = "SampleId")%>% 
+    mutate(Sex = factor(if_else( Sex =="F" , 1 , 2))) %>%
+    mutate(PrimaryDx = factor(if_else( PrimaryDx =="Control" , 0 , 1)) )
+  
+  #rownames(covariates_Final) <-  covariates_Final %>% pull(1)
+  
+  
+  # covariates_Final = setNames(data.frame(t(covariates_Final[,-1])), 
+  #                             covariates_Final[,1])
+  t(covariates_Final) %>%
+    write.table(paste0(cell_type_names[i] ,"_covariates.txt") , row.names = T , col.names = F, sep = "\t" , quote = F)
+  
+}
+
+
+
