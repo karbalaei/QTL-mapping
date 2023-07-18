@@ -6,7 +6,7 @@ dir = ("/data/fgoes1/RK/tensorqtl/MDD_eQTL/")
 
 setwd(dir)
 
-MDD_control_sc_maf_original <-  read.table("MDD_control_sc_maf1.txt", row.names = 1, sep = "\t", header = T)
+MDD_control_sc_maf_original <-  read.table("MDD_control_sc_maf1_numeric.txt", row.names = 1, sep = "\t", header = T)
 
 
 cell_type_names <- c("astro","endo","excit_L2_3_A", "excit_L4_5_A",  "excit_L4_5_B", "excit_L5_6_A", "excit_L5_6_B" ,
