@@ -1,0 +1,62 @@
+salloc -J interact -N 1-1 -n 32 --mem=100G --time=6:00:00 -p defq srun --pty bash
+
+ml anaconda
+
+#conda create -n snp_bryois python
+
+conda activate snp_bryois
+
+conda install pandas
+
+conda install dask
+
+conda install -c conda-forge matplotlib
+
+
+
+
+ml python
+
+#python
+import os
+#import pandas as pd
+from dask import dataframe as dd
+
+os.getcwd()
+
+os.chdir('/data/fgoes1/RK/tensorqtl/MDD_eQTL/Bryois_results')
+
+
+astro_my_data = pd.read_csv('astro_edgeR_broad_base_results_all.txt', sep="\t", header=0)
+
+astro_bryois_data = pd.read_csv('Astrocytes.data2.txt', sep="\t", header=0)
+
+snp_ensemble =  pd.read_csv("convert_id_to_rsid.txt" ,sep="\t", header = 0 , names=["variant_id" , "SNP_id"])
+
+astro_my_data_joined = pd.merge(astro_my_data, snp_ensemble, on=['variant_id'])
+
+astro_bryois_data_joined = pd.merge(astro_bryois_data, snp_ensemble, on=['SNP_id'])
+
+astro_all_data_joined = pd.merge(astro_my_data_joined, astro_bryois_data_joined, on=['SNP_id' , 'variant_id'])
+
+astro_all_data = pd.read_csv('astro_all_joined_table.txt', sep="\t", header=0)
+
+#astro_all_data = dd.read_csv('astro_all_joined_table.txt', sep="\t", header=0)
+
+
+astro_my_data = dd.read_csv('astro_edgeR_broad_base_results_all.txt', sep="\t", header=0)
+astro_bryois_data = dd.read_csv('Astrocytes.data2.txt', sep="\t", header=0)
+snp_ensemble =  dd.read_csv("convert_id_to_rsid.txt" ,sep="\t", header = 0 , names=["variant_id" , "SNP_id"])
+
+astro_my_data_joined = astro_my_data.merge(snp_ensemble, on=['variant_id'])
+astro_bryois_data_joined = astro_bryois_data.merge(snp_ensemble, on=['SNP_id'])
+
+astro_all_data_joined = astro_my_data_joined.merge(astro_bryois_data_joined, on=['SNP_id' , 'variant_id'])
+
+astro_all_data_joined_selected = astro_all_data_joined[["slope" , "Beta"]]
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import io
+from PIL import Image
