@@ -127,7 +127,7 @@ for ( i in 1: length(cell_type_names)) {
   logcount_data%>% mutate(Symbol= rownames(logcount_data)) %>% left_join(genepos_both_gene_symbol_and_ensemble , by = "Symbol") %>% dplyr::select(!(c( "CHR","Start","End", "Symbol"))) %>% 
     dplyr::rename(geneid = ID) %>%
     relocate(geneid) %>%
-    fwrite(paste0(cell_type_names[i], "_GE2.txt"),  sep = "\t" , quote = F , row.names = F) # write a compressed file read.table(gzfile("test.dat.gz"),row.names=1)# read it back in
+    fwrite(paste0(cell_type_names[i], "_GE.txt"),  sep = "\t" , quote = F , row.names = F) # write a compressed file read.table(gzfile("test.dat.gz"),row.names=1)# read it back in
   
   ## PCA ##
   
