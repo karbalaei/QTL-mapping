@@ -79,7 +79,7 @@ for ( i in 1: length(cell_type_names)) {
     set_names("Id") %>% left_join(Single_Cell_sample_id_data , by = "Id") %>%
     pull(2)
   
-  logcount_data%>%
+   logcount_data%>%
     merge(rowData_pb, 
           by = 'row.names')%>% 
     left_join(TSS_df , by = "ID" )%>%
@@ -89,7 +89,8 @@ for ( i in 1: length(cell_type_names)) {
     dplyr::filter(chr %in% c(1:22 , "X" )) %>% #MT should add to list
     mutate(chr = factor(chr ,  levels = c(1:22 ,  "X") )) %>%
     arrange(chr , start , end) %>%
-    dplyr::rename("#chr" = chr) %>% format(round(8), nsmall = 8) %>%
+    dplyr::rename("#chr" = chr)%>% 
+     #format(round(8), nsmall = 8) %>%
     write.table(gzfile(paste0("pb_",cell_type_names[i], "_df.bed.gz")),  sep = "\t" , quote = F , row.names = F) # write a compressed file read.table(gzfile("test.dat.gz"),row.names=1)# read it back in
   
   ###### PCA #####
